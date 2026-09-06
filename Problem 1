@@ -5,13 +5,11 @@ weight = [72, 64, 84, 80, 72, 72]
 n = len(height)
 
 # Mean
-
 mean_h = sum(height) / n
 
 mean_w = sum(weight) / n
 
 # Variance
-
 var_h = sum((x - mean_h) ** 2 for x in height) / n
 
 var_w = sum((x - mean_w) ** 2 for x in weight) / n
@@ -25,9 +23,23 @@ print("Variance of height =", var_h)
 print("Variance of weight =", var_w)
 
 # Covariance
-
 cov = sum((height[i] - mean_h) * (weight[i] - mean_w)
 
           for i in range(n)) / n
 
 print("Covariance =", cov)
+
+# Covariance Matrix
+covariance_matrix = [
+
+    [var_h, cov],
+
+    [cov, var_w]
+
+]
+
+print("Covariance Matrix:")
+
+for row in covariance_matrix:
+
+    print(row)
