@@ -1,0 +1,51 @@
+x = [12.1, 13.2, 15.6, 17.2, 18.8, 10.3, 11.7, 16.4]
+
+y = [48, 59, 32, 18, 41, 32, 31, 30]
+
+z = [101, 171, 112, 132, 140, 112, 151, 96]
+
+n = len(x)
+
+# Means
+mean_x = sum(x) / n
+
+mean_y = sum(y) / n
+
+mean_z = sum(z) / n
+
+# Variances
+var_x = sum((a - mean_x) ** 2 for a in x) / n
+
+var_y = sum((b - mean_y) ** 2 for b in y) / n
+
+var_z = sum((c - mean_z) ** 2 for c in z) / n
+
+# Covariances
+cov_xy = sum((x[i] - mean_x) * (y[i] - mean_y)
+
+             for i in range(n)) / n
+
+cov_xz = sum((x[i] - mean_x) * (z[i] - mean_z)
+
+             for i in range(n)) / n
+
+cov_yz = sum((y[i] - mean_y) * (z[i] - mean_z)
+
+             for i in range(n)) / n
+
+# Covariance Matrix
+covariance_matrix = [
+
+    [var_x,  cov_xy, cov_xz],
+
+    [cov_xy, var_y,  cov_yz],
+
+    [cov_xz, cov_yz, var_z]
+
+]
+
+print("Covariance Matrix:")
+
+for row in covariance_matrix:
+
+    print(row)
