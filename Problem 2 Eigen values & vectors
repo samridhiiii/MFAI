@@ -1,0 +1,95 @@
+import math
+
+# Covariance Matrix
+A = [
+
+    [7.93359375, -8.8171875, -0.6359375],
+
+    [-8.8171875, 139.234375, 107.671875],
+
+    [-0.6359375, 107.671875, 599.109375]
+
+]
+
+# Coefficients of characteristic equation
+T = A[0][0] + A[1][1] + A[2][2]
+
+S = (A[0][0]*A[1][1] +
+
+     A[0][0]*A[2][2] +
+
+     A[1][1]*A[2][2] -
+
+     A[0][1]**2 -
+
+     A[0][2]**2 -
+
+     A[1][2]**2)
+
+D = (A[0][0]*(A[1][1]*A[2][2] - A[1][2]*A[2][1])
+
+     - A[0][1]*(A[1][0]*A[2][2] - A[1][2]*A[2][0])
+
+     + A[0][2]*(A[1][0]*A[2][1] - A[1][1]*A[2][0]))
+
+print("Characteristic equation:")
+
+print(f"λ³ - {T:.4f}λ² + {S:.4f}λ - {D:.4f} = 0")
+
+import sympy as sp
+
+A = sp.Matrix([
+
+    [7.93359375, -8.8171875, -0.6359375],
+
+    [-8.8171875, 139.234375, 107.671875],
+
+    [-0.6359375, 107.671875, 599.109375]
+
+])
+
+# Characteristic equation
+lambda_value = sp.symbols('lambda')
+
+equation = A.charpoly(lambda_value).as_expr()
+
+print("Characteristic equation:")
+
+print(equation)
+
+# Eigenvalues
+print("\nEigenvalues:")
+
+print(A.eigenvals())
+
+def eigenvector(A, l):
+
+    B = [
+
+        [A[0][0]-l, A[0][1],   A[0][2]],
+
+        [A[1][0],   A[1][1]-l, A[1][2]],
+
+        [A[2][0],   A[2][1],   A[2][2]-l]
+
+    ]
+
+    # Cross product of first two rows
+    x = B[0][1]*B[1][2] - B[0][2]*B[1][1]
+
+    y = B[0][2]*B[1][0] - B[0][0]*B[1][2]
+
+    z = B[0][0]*B[1][1] - B[0][1]*B[1][0]
+
+    # Normalize
+    length = math.sqrt(x*x + y*y + z*z)
+
+    return [x/length, y/length, z/length]
+
+print("\nEigenvectors:")
+
+for l in eigenvalues:
+
+    v = eigenvector(A, l)
+
+    print([round(x, 4) for x in v])
